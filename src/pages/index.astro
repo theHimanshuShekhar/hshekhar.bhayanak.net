@@ -1,0 +1,197 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Himanshu Shekhar — Automation Engineer, web developer, and AI tinkerer." />
+    <title>Himanshu Shekhar | bhayanak.net</title>
+  </head>
+  <body>
+
+    <!-- First prompt line with typewriter animation -->
+    <div class="typeme">
+      <span class="text-tn-prompt">hshekhar@bhayanak</span>
+      <span class="text-tn-path"> ~</span>
+      <span class="text-tn-dollar"> $</span>
+      <span class="text-tn-cmd"> me -h</span>
+    </div>
+
+    <section class="output">
+
+      <!-- Header -->
+      <h3>Himanshu Shekhar</h3>
+
+      <!-- about output -->
+      <div class="text-tn-output" style="margin-top:0.5em">
+        <p>Software engineer with a day job in automation (BNP Paribas ISPL).</p>
+        <p>Solid with JavaScript, TypeScript, and the web stack.</p>
+        <p>Currently learning Go and Rust — emphasis on learning.</p>
+        <p>Obsessed with AI tooling. Avid gamer.</p>
+        <p>Tinkerer. Always building something.</p>
+      </div>
+
+      <!-- cat interests.md -->
+      <div class="prompt mt-4">
+        <span class="text-tn-prompt">hshekhar@bhayanak</span>
+        <span class="text-tn-path"> ~</span>
+        <span class="text-tn-dollar"> $</span>
+        <span class="text-tn-cmd"> cat interests.md</span>
+      </div>
+      <h3>Interests</h3>
+      <ul class="text-tn-output list">
+        <li>linux</li>
+        <li>ai</li>
+        <li>frontend dev</li>
+        <li>backend dev</li>
+        <li>devops</li>
+        <li>gaming</li>
+      </ul>
+
+      <!-- cat now.md -->
+      <div class="prompt mt-4">
+        <span class="text-tn-prompt">hshekhar@bhayanak</span>
+        <span class="text-tn-path"> ~</span>
+        <span class="text-tn-dollar"> $</span>
+        <span class="text-tn-cmd"> cat now.md</span>
+      </div>
+      <h3>Now</h3>
+      <p class="text-tn-output">→ Obsessing over AI and AI tooling these days</p>
+      <ul class="text-tn-output list">
+        <li>OpenCode</li>
+        <li>HermesAgent</li>
+        <li>Claude Code</li>
+      </ul>
+
+      <!-- cat contact.md -->
+      <div class="prompt mt-4">
+        <span class="text-tn-prompt">hshekhar@bhayanak</span>
+        <span class="text-tn-path"> ~</span>
+        <span class="text-tn-dollar"> $</span>
+        <span class="text-tn-cmd"> cat contact.md</span>
+      </div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="https://github.com/theHimanshuShekhar" target="_blank" rel="noopener">→ github.com/theHimanshuShekhar</a></li>
+        <li><a href="https://www.linkedin.com/in/thehshekhar/" target="_blank" rel="noopener">→ linkedin.com/in/thehshekhar</a></li>
+        <li><a href="mailto:hshekhar.dev@gmail.com">→ hshekhar.dev@gmail.com</a></li>
+      </ul>
+
+      <!-- Gag: bad commands cursor -->
+      <div class="prompt mt-4">
+        <span class="text-tn-prompt">hshekhar@bhayanak</span>
+        <span class="text-tn-path"> ~</span>
+        <span class="text-tn-dollar"> $</span>
+        <span id="bad-cmd" class="text-tn-cmd"></span><span class="cursor"></span>
+      </div>
+
+    </section>
+
+  </body>
+</html>
+
+<script>
+  const BAD_CMDS = [
+    'rm -rf /',
+    'sudo rm -rf /',
+    'pg drop prod',
+    'dd if=/dev/random of=/dev/sda',
+    ':(){ :|:& };:',
+    'chmod -R 777 /',
+    'DROP TABLE users;',
+    'git push --force origin main',
+    'cat /dev/urandom > /dev/sda',
+    'mkfs.ext4 /dev/sda1',
+    'sudo passwd root',
+    'kill -9 1',
+  ];
+
+  const el = document.getElementById('bad-cmd');
+  let current = '';
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  async function run() {
+    while (true) {
+      await sleep(1500 + Math.random() * 2000);
+
+      const cmd = BAD_CMDS[Math.floor(Math.random() * BAD_CMDS.length)];
+
+      for (const ch of cmd) {
+        current += ch;
+        el.textContent = ' ' + current;
+        await sleep(70 + Math.random() * 80);
+      }
+
+      await sleep(600 + Math.random() * 800);
+
+      while (current.length > 0) {
+        current = current.slice(0, -1);
+        el.textContent = current ? ' ' + current : '';
+        await sleep(30 + Math.random() * 40);
+      }
+    }
+  }
+
+  run();
+</script>
+
+<style>
+  .list {
+    list-style-type: disc;
+    padding-left: 1.5em;
+  }
+
+  h3 {
+    display: inline-block;
+    font-size: inherit;
+    font-weight: 500;
+    padding: 0 0.5em;
+    margin-bottom: 0;
+    background-color: #bb9af7;
+    color: #1a1b26;
+  }
+
+  .output {
+    width: 100%;
+    max-width: 80ch;
+    animation: fade 5s;
+  }
+
+  .typeme {
+    width: 30ch;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 10px solid #c0caf5;
+    animation: typing 2s steps(25) forwards;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    background-color: #c0caf5;
+    vertical-align: text-bottom;
+    animation: blink-cursor 0.5s step-end infinite alternate;
+  }
+
+  @keyframes fade {
+    0%   { opacity: 0; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes typing {
+    0%   { width: 0; border-color: #c0caf5; }
+    99%  { border-color: #c0caf5; }
+    100% { width: 30ch; border-color: transparent; }
+  }
+
+  @keyframes blink-cursor {
+    50% { opacity: 0; }
+  }
+</style>
