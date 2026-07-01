@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # brainstorming sessions
 .superpowers/
+.worktrees/
 
 # wrangler files
 .wrangler

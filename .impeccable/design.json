@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-01T08:11:30Z",
+  "title": "Design System: hshekhar.bhayanak.net",
+  "extensions": {
+    "colorMeta": {
+      "storm-shell": {
+        "role": "neutral",
+        "displayName": "Storm Shell",
+        "canonical": "#24283b",
+        "tonalRamp": ["oklch(15% 0.035 270)", "oklch(24% 0.04 270)", "oklch(33% 0.04 270)", "oklch(44% 0.035 270)", "oklch(56% 0.03 270)", "oklch(69% 0.025 270)", "oklch(82% 0.018 270)", "oklch(95% 0.01 270)"]
+      },
+      "storm-ink": {
+        "role": "neutral",
+        "displayName": "Storm Ink",
+        "canonical": "#c0caf5",
+        "tonalRamp": ["oklch(18% 0.04 275)", "oklch(28% 0.055 275)", "oklch(39% 0.065 275)", "oklch(51% 0.075 275)", "oklch(64% 0.07 275)", "oklch(76% 0.06 275)", "oklch(87% 0.04 275)", "oklch(96% 0.02 275)"]
+      },
+      "prompt-violet": {
+        "role": "primary",
+        "displayName": "Prompt Violet",
+        "canonical": "#bb9af7",
+        "tonalRamp": ["oklch(18% 0.08 300)", "oklch(28% 0.11 300)", "oklch(39% 0.14 300)", "oklch(51% 0.16 300)", "oklch(63% 0.15 300)", "oklch(74% 0.12 300)", "oklch(86% 0.075 300)", "oklch(95% 0.035 300)"]
+      },
+      "path-blue": {
+        "role": "secondary",
+        "displayName": "Path Blue",
+        "canonical": "#7aa2f7",
+        "tonalRamp": ["oklch(17% 0.08 260)", "oklch(27% 0.11 260)", "oklch(38% 0.14 260)", "oklch(50% 0.17 260)", "oklch(62% 0.16 260)", "oklch(74% 0.13 260)", "oklch(86% 0.08 260)", "oklch(95% 0.035 260)"]
+      },
+      "dollar-green": {
+        "role": "tertiary",
+        "displayName": "Dollar Green",
+        "canonical": "#9ece6a",
+        "tonalRamp": ["oklch(18% 0.07 135)", "oklch(28% 0.09 135)", "oklch(39% 0.11 135)", "oklch(51% 0.13 135)", "oklch(63% 0.125 135)", "oklch(74% 0.105 135)", "oklch(86% 0.07 135)", "oklch(95% 0.035 135)"]
+      },
+      "ghost-output": {
+        "role": "neutral",
+        "displayName": "Ghost Output",
+        "canonical": "#565f89",
+        "tonalRamp": ["oklch(16% 0.035 270)", "oklch(25% 0.04 270)", "oklch(35% 0.045 270)", "oklch(46% 0.045 270)", "oklch(58% 0.04 270)", "oklch(71% 0.032 270)", "oklch(84% 0.02 270)", "oklch(95% 0.01 270)"]
+      },
+      "badge-ink": {
+        "role": "neutral",
+        "displayName": "Badge Ink",
+        "canonical": "#1a1b26",
+        "tonalRamp": ["oklch(12% 0.02 270)", "oklch(20% 0.025 270)", "oklch(30% 0.025 270)", "oklch(42% 0.02 270)", "oklch(55% 0.018 270)", "oklch(69% 0.014 270)", "oklch(84% 0.01 270)", "oklch(96% 0.005 270)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Primary identity line when the terminal page needs a stronger first fold." },
+      "headline": { "displayName": "Command Label", "purpose": "Inline highlighted section labels and command results." },
+      "body": { "displayName": "Output Body", "purpose": "Readable terminal output, bio copy, list items, and contact text." },
+      "label": { "displayName": "Prompt Label", "purpose": "Prompt fragments, command text, and terminal state syntax." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "typewriter", "value": "typing 2s steps(25) forwards", "purpose": "First prompt shell animation; must be disabled or simplified under reduced motion." },
+      { "name": "output-fade", "value": "fade 5s", "purpose": "Current delayed output reveal; documented as existing behavior, not a recommended content gate." },
+      { "name": "cursor-blink", "value": "blink-cursor 0.5s step-end infinite alternate", "purpose": "Live prompt cursor flavor; must not distract from reading." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "600px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Shell Page",
+      "kind": "custom",
+      "refersTo": "shell-page",
+      "description": "Full-page Tokyo Night terminal surface.",
+      "html": "<main class=\"ds-shell-page\">hshekhar@bhayanak <span>~</span> <strong>$</strong> me -h</main>",
+      "css": ".ds-shell-page { background: #24283b; color: #c0caf5; font-family: 'JetBrains Mono', monospace; font-weight: 500; min-height: 180px; padding: 16px; font-size: 16px; } .ds-shell-page span { color: #7aa2f7; } .ds-shell-page strong { color: #9ece6a; font-weight: 500; }"
+    },
+    {
+      "name": "Prompt Line",
+      "kind": "custom",
+      "refersTo": "prompt-line",
+      "description": "The core command prompt identity primitive.",
+      "html": "<div class=\"ds-prompt-line\"><span class=\"ds-prompt-user\">hshekhar@bhayanak</span><span class=\"ds-prompt-path\"> ~</span><span class=\"ds-prompt-dollar\"> $</span><span class=\"ds-prompt-command\"> cat now.md</span></div>",
+      "css": ".ds-prompt-line { background: #24283b; font-family: 'JetBrains Mono', monospace; font-weight: 500; color: #c0caf5; } .ds-prompt-user { color: #bb9af7; } .ds-prompt-path { color: #7aa2f7; } .ds-prompt-dollar { color: #9ece6a; } .ds-prompt-command { color: #c0caf5; }"
+    },
+    {
+      "name": "Command Label",
+      "kind": "chip",
+      "refersTo": "command-label",
+      "description": "Flat inline highlighted label for command output sections.",
+      "html": "<span class=\"ds-command-label\">Now</span>",
+      "css": ".ds-command-label { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; background: #bb9af7; color: #1a1b26; padding: 0 0.5em; border-radius: 0; }"
+    },
+    {
+      "name": "Output Text",
+      "kind": "custom",
+      "refersTo": "output-text",
+      "description": "Terminal response copy. Existing muted value is documented but should be contrast-corrected for essential body text.",
+      "html": "<p class=\"ds-output-text\">Software engineer with a day job in automation. Tinkerer. Always building something.</p>",
+      "css": ".ds-output-text { max-width: 80ch; background: #24283b; color: #565f89; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 16px; margin: 0; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Text-only contact/action link with terminal arrow syntax.",
+      "html": "<a class=\"ds-text-link\" href=\"#\">→ github.com/theHimanshuShekhar</a>",
+      "css": ".ds-text-link { background: #24283b; color: #7aa2f7; font-family: 'JetBrains Mono', monospace; font-weight: 500; text-decoration: none; outline-offset: 3px; } .ds-text-link:hover { text-decoration: underline; } .ds-text-link:focus-visible { outline: 2px solid #bb9af7; text-decoration: underline; }"
+    },
+    {
+      "name": "Cursor",
+      "kind": "custom",
+      "refersTo": "cursor",
+      "description": "Block cursor for the playful live prompt state.",
+      "html": "<span class=\"ds-cursor\" aria-hidden=\"true\"></span>",
+      "css": ".ds-cursor { display: inline-block; width: 0.55em; height: 1em; background: #c0caf5; vertical-align: text-bottom; animation: ds-blink 0.5s step-end infinite alternate; } @keyframes ds-blink { 50% { opacity: 0; } } @media (prefers-reduced-motion: reduce) { .ds-cursor { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Mischief Terminal",
+    "overview": "This design system is a compact shell session for a real engineer, not a generic portfolio dressed in dark mode. The surface is Tokyo Night Storm, the voice is mono-forward, and the rhythm is command then output. It should feel like a competent terminal that occasionally reveals a joke, not a joke that happens to contain a résumé. The system is deliberately flat. Depth comes from terminal roles: prompt identity, path color, command color, output color, cursor behavior, and highlighted command labels. No cards, no soft shadows, no decorative panels.",
+    "keyCharacteristics": [
+      "Mono-forward, single-family typography with JetBrains Mono.",
+      "Tokyo Night Storm base with violet, blue, and green prompt roles.",
+      "Flat terminal primitives instead of cards, shadows, or glass.",
+      "Short command/output groupings with high information density.",
+      "Mischief is allowed only when it does not hide content or reduce accessibility."
+    ],
+    "rules": [
+      { "name": "The Role Color Rule", "body": "Violet identifies the prompt/system label, blue identifies paths and links, green identifies prompt punctuation or success. Do not use these colors interchangeably.", "section": "colors" },
+      { "name": "The Ghost Is Not Body Rule", "body": "Muted terminal output may annotate; it must not carry essential body text below WCAG AA contrast.", "section": "colors" },
+      { "name": "The No Beige Escape Rule", "body": "Do not soften the site into cream, sand, paper, or warm-neutral portfolio territory. The shell is the brand surface.", "section": "colors" },
+      { "name": "The One Font Rule", "body": "JetBrains Mono carries the whole identity. Add hierarchy through role, color, spacing, and content structure before adding another typeface.", "section": "typography" },
+      { "name": "The Flat Shell Rule", "body": "Surfaces are not lifted. If something needs emphasis, make it a command, a prompt state, or a label — not a card.", "section": "elevation" },
+      { "name": "The No Ghost Card Rule", "body": "Never combine a 1px border with a soft wide drop shadow. That pattern is prohibited for this brand.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do preserve the Storm Console roles: Prompt Violet for prompt identity, Path Blue for paths/links, Dollar Green for $, Storm Ink for readable commands.",
+      "Do keep the layout terminal-native and flat; use prompts and command structure instead of cards.",
+      "Do make essential text meet WCAG AA contrast before treating it as production body copy.",
+      "Do keep content visible by default; motion may enhance but must not hide the page.",
+      "Do make playful details feel earned: one good terminal joke beats constant gimmick motion.",
+      "Do use exact, personal copy that sounds like Himanshu rather than portfolio-generator filler."
+    ],
+    "donts": [
+      "Don't create a generic SaaS portfolio: no gradient cards, hero-metric templates, startup sameness, or template polish without personality.",
+      "Don't create a corporate résumé page: no sterile recruiter-first layout that removes the terminal voice.",
+      "Don't create unreadable terminal cosplay: no tiny text, low contrast, hidden links, motion gimmicks, or jokes that block scanning.",
+      "Don't use gradient text, glassmorphism, side-stripe card borders, or repeating stripe backgrounds.",
+      "Don't add rounded cards, nested cards, or soft shadows to make the page feel designed. That is the wrong register.",
+      "Don't use Ghost Output for essential body text unless the contrast is corrected to ≥4.5:1."
+    ]
+  }
+}
