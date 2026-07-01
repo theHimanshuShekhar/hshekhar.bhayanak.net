@@ -10,16 +10,16 @@
   --color-tn-path: #7aa2f7;
   --color-tn-dollar: #9ece6a;
   --color-tn-cmd: #c0caf5;
-  --color-tn-output: #565f89;
+  --color-tn-output: #a9b1d6;
   --color-tn-link: #7aa2f7;
 }
 
 @layer base {
   * {
-    background: #24283b;
+    background: var(--color-tn-bg);
     font-family: "JetBrains Mono", monospace;
     font-weight: 500;
-    color: #c0caf5;
+    color: var(--color-tn-text);
   }
 
   body {
@@ -32,12 +32,29 @@
   }
 
   a {
-    color: #7aa2f7;
+    color: var(--color-tn-link);
     text-decoration: none;
+    text-underline-offset: 0.18em;
   }
 
   a:hover {
     text-decoration: underline;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-tn-prompt);
+    outline-offset: 0.2em;
+    text-decoration: underline;
+  }
+
+  .contact-links {
+    margin-top: 0;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
   }
 
   @media (min-width: 600px) {

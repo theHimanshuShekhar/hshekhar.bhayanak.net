@@ -37,8 +37,8 @@
       "ghost-output": {
         "role": "neutral",
         "displayName": "Ghost Output",
-        "canonical": "#565f89",
-        "tonalRamp": ["oklch(16% 0.035 270)", "oklch(25% 0.04 270)", "oklch(35% 0.045 270)", "oklch(46% 0.045 270)", "oklch(58% 0.04 270)", "oklch(71% 0.032 270)", "oklch(84% 0.02 270)", "oklch(95% 0.01 270)"]
+        "canonical": "#a9b1d6",
+        "tonalRamp": ["oklch(18% 0.04 270)", "oklch(28% 0.05 270)", "oklch(39% 0.06 270)", "oklch(51% 0.065 270)", "oklch(63% 0.06 270)", "oklch(74% 0.05 270)", "oklch(86% 0.035 270)", "oklch(95% 0.015 270)"]
       },
       "badge-ink": {
         "role": "neutral",
@@ -92,9 +92,9 @@
       "name": "Output Text",
       "kind": "custom",
       "refersTo": "output-text",
-      "description": "Terminal response copy. Existing muted value is documented but should be contrast-corrected for essential body text.",
+      "description": "Terminal response copy using the corrected WCAG AA secondary output color.",
       "html": "<p class=\"ds-output-text\">Software engineer with a day job in automation. Tinkerer. Always building something.</p>",
-      "css": ".ds-output-text { max-width: 80ch; background: #24283b; color: #565f89; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 16px; margin: 0; }"
+      "css": ".ds-output-text { max-width: 80ch; background: #24283b; color: #a9b1d6; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 16px; margin: 0; }"
     },
     {
       "name": "Text Link",
@@ -145,7 +145,7 @@
       "Don't create unreadable terminal cosplay: no tiny text, low contrast, hidden links, motion gimmicks, or jokes that block scanning.",
       "Don't use gradient text, glassmorphism, side-stripe card borders, or repeating stripe backgrounds.",
       "Don't add rounded cards, nested cards, or soft shadows to make the page feel designed. That is the wrong register.",
-      "Don't use Ghost Output for essential body text unless the contrast is corrected to ≥4.5:1."
+      "Don't darken Ghost Output below WCAG AA for essential body text."
     ]
   }
 }
