@@ -47,6 +47,22 @@
     text-decoration: underline;
   }
 
+  .command-label {
+    display: inline-block;
+    font-size: inherit;
+    font-weight: 500;
+    padding: 0 0.5em;
+    margin: 0;
+    background-color: var(--color-tn-prompt);
+    color: #1a1b26;
+  }
+
+  .blog-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+  }
+
   .contact-links {
     margin-top: 0;
   }
