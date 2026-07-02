@@ -30,7 +30,7 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
     </header>
 
     <main class="blog-workspace" aria-labelledby="blog-index-title">
-      <section class="post-pane post-pane-index" aria-labelledby="blog-index-title">
+      <section class="post-archive" aria-labelledby="blog-index-title">
         <div class="pane-command" aria-hidden="true">total {posts.length}</div>
         <h2 id="blog-index-title" class="sr-only">Blog posts</h2>
 
@@ -39,9 +39,13 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
             {posts.map((post) => (
               <li class="post-row">
                 <a href={postPath(post)} class="post-row-link">
-                  <span class="post-date">{formatDate(post.data.pubDate)}</span>
-                  <span class="post-tag">{post.data.tags[0] ?? 'note'}</span>
-                  <span class="post-title">{post.data.title}</span>
+                  <span class="post-title-line">
+                    <span class="post-title">{post.data.title}</span>
+                    {post === latest && <span class="latest-marker">latest</span>}
+                  </span>
+                  <span class="post-meta">
+                    {formatDate(post.data.pubDate)} · {post.data.tags.join(' / ')}
+                  </span>
                   <span class="post-description">{post.data.description}</span>
                 </a>
               </li>
@@ -54,28 +58,10 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
           </div>
         )}
       </section>
-
-      <aside class="post-pane post-pane-preview" aria-labelledby="latest-title">
-        <p class="prompt-line preview-prompt">
-          <span class="text-tn-prompt">hshekhar@bhayanak</span><span class="text-tn-path"> ~/blog</span><span class="text-tn-dollar"> $</span><span class="text-tn-cmd"> cat latest.md</span>
-        </p>
-        {latest ? (
-          <article class="latest-note">
-            <p class="post-meta">published {formatDate(latest.data.pubDate)} · {latest.data.tags.join(' / ')}</p>
-            <h2 id="latest-title"><a href={postPath(latest)}>{latest.data.title}</a></h2>
-            <p class="latest-description">{latest.data.description}</p>
-            <a class="read-link" href={postPath(latest)}>open ./posts/{latest.id.replace(/\.md$/, '')}.md →</a>
-          </article>
-        ) : (
-          <div class="empty-output text-tn-output">
-            <p id="latest-title">cat: latest.md: No such file or directory</p>
-          </div>
-        )}
-      </aside>
     </main>
 
     <nav class="terminal-nav" aria-label="Terminal navigation">
-      <a href="/">← cd ..</a>
+      <a href="/">← home</a>
       <a href="mailto:hshekhar.dev@gmail.com">./contact.md</a>
     </nav>
   </body>
@@ -101,25 +87,16 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
   }
 
   .blog-workspace {
-    width: min(100%, 96rem);
-    display: grid;
-    gap: 1.2rem;
+    width: min(100%, 76ch);
     margin-top: clamp(1.8rem, 4vw, 3.5rem);
   }
 
-  .post-pane {
+  .post-archive {
     min-width: 0;
-  }
-
-  .post-pane-preview {
-    border-top: 1px solid color-mix(in srgb, var(--color-tn-output) 34%, transparent);
-    padding-top: 1.2rem;
   }
 
   .pane-command,
   .post-meta,
-  .post-date,
-  .post-tag,
   .post-description {
     color: var(--color-tn-output);
   }
@@ -130,7 +107,7 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
 
   .post-list {
     display: grid;
-    gap: 0.75rem;
+    gap: clamp(1rem, 2vw, 1.35rem);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -138,19 +115,21 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
 
   .post-row-link {
     display: grid;
-    grid-template-columns: minmax(6.5rem, max-content) minmax(5rem, max-content) minmax(0, 1fr);
-    column-gap: 1rem;
-    row-gap: 0.15rem;
-    align-items: baseline;
-    min-height: 3.1rem;
-    padding: 0.15rem 0;
+    gap: 0.22rem;
+    min-height: 3.4rem;
+    padding: 0.1rem 0;
     text-decoration: none;
   }
 
+  .post-title-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.7rem;
+    align-items: baseline;
+  }
+
   .post-row-link:hover .post-title,
-  .post-row-link:focus-visible .post-title,
-  .latest-note a:hover,
-  .latest-note a:focus-visible {
+  .post-row-link:focus-visible .post-title {
     text-decoration: underline;
     text-underline-offset: 0.18em;
   }
@@ -160,52 +139,31 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
     overflow-wrap: anywhere;
   }
 
+  .latest-marker {
+    color: var(--color-tn-dollar);
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+
+  .latest-marker::before {
+    content: "[";
+    color: var(--color-tn-output);
+  }
+
+  .latest-marker::after {
+    content: "]";
+    color: var(--color-tn-output);
+  }
+
+  .post-meta {
+    line-height: 1.45;
+  }
+
   .post-description {
-    grid-column: 3;
+    max-width: 62ch;
     line-height: 1.5;
     text-wrap: pretty;
   }
-
-  .preview-prompt {
-    margin-bottom: 0.75rem;
-  }
-
-  .latest-note {
-    display: grid;
-    gap: 0.8rem;
-    max-width: 68ch;
-  }
-
-  .latest-note h2 {
-    margin: 0;
-    font-size: clamp(1.35rem, 1.05rem + 1.2vw, 2.1rem);
-    line-height: 1.25;
-    text-wrap: balance;
-  }
-
-  .latest-note h2 a {
-    color: var(--color-tn-text);
-  }
-
-  .post-meta,
-  .latest-description {
-    margin: 0;
-    line-height: 1.55;
-  }
-
-  .latest-description {
-    max-width: 58ch;
-    color: var(--color-tn-output);
-    text-wrap: pretty;
-  }
-
-  .read-link {
-    width: fit-content;
-    min-height: 2.75rem;
-    display: inline-flex;
-    align-items: center;
-  }
-
   .terminal-nav {
     display: flex;
     flex-wrap: wrap;
@@ -235,31 +193,4 @@ const postPath = (post: (typeof posts)[number]) => `/blog/${post.id.replace(/\.m
     border: 0;
   }
 
-  @media (max-width: 640px) {
-    .post-row-link {
-      grid-template-columns: 1fr;
-      gap: 0.16rem;
-      min-height: 4rem;
-    }
-
-    .post-description {
-      grid-column: auto;
-    }
-  }
-
-  @media (min-width: 900px) {
-    .blog-workspace {
-      grid-template-columns: minmax(24rem, 0.72fr) minmax(28rem, 1fr);
-      gap: clamp(1.4rem, 3vw, 2.8rem);
-      align-items: start;
-    }
-
-    .post-pane-preview {
-      border-top: 0;
-      border-left: 1px solid color-mix(in srgb, var(--color-tn-output) 34%, transparent);
-      padding-top: 0;
-      padding-left: clamp(1.4rem, 3vw, 2.8rem);
-      min-height: 22rem;
-    }
-  }
 </style>
